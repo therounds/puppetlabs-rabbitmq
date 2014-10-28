@@ -23,7 +23,11 @@ Puppet::Type.type(:rabbitmq_user).provide(:rabbitmqctl) do
   end
 
   def create
-    rabbitmqctl('add_user', resource[:name], resource[:password])
+    if resource[:password]
+      rabbitmqctl('add_user', resource[:name], resource[:password])
+    else
+      rabbitmqctl('add_user', resource[:name])
+    end
     if resource[:admin] == :true
       make_user_admin()
     end
