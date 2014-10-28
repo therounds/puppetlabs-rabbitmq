@@ -57,6 +57,9 @@
   <%- if @ssl && @ssl_stomp_port -%>,
     {ssl_listeners, [<%= @ssl_stomp_port %>]}
   <%- end -%>
+  <%- if @ssl_stomp_cert_login -%>,
+    {ssl_cert_login, true}
+  <%- end -%>
   ]}
 <% end -%>
 <%- if @ldap_auth -%>,

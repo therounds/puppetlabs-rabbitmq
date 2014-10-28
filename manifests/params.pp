@@ -81,6 +81,7 @@ class rabbitmq::params {
   $ssl_port                   = '5671'
   $ssl_management_port        = '15671'
   $ssl_stomp_port             = '6164'
+  $ssl_stomp_cert_login       = false
   $ssl_verify                 = 'verify_none'
   $ssl_fail_if_no_peer_cert   = 'false'
   $stomp_ensure               = false

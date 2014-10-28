@@ -27,6 +27,7 @@ class rabbitmq::config {
   $ssl_port                   = $rabbitmq::ssl_port
   $ssl_management_port        = $rabbitmq::ssl_management_port
   $ssl_stomp_port             = $rabbitmq::ssl_stomp_port
+  $ssl_stomp_cert_login       = $rabbitmq::ssl_stomp_cert_login
   $ssl_verify                 = $rabbitmq::ssl_verify
   $ssl_fail_if_no_peer_cert   = $rabbitmq::ssl_fail_if_no_peer_cert
   $stomp_port                 = $rabbitmq::stomp_port
