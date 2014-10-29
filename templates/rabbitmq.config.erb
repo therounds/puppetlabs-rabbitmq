@@ -38,12 +38,15 @@
 <%- if @admin_enable -%>,
   {rabbitmq_management, [
     {listener, [
-<%- if @ssl -%>
+<%- if @ssl and @mgmt_ssl -%>
       {port, <%= @ssl_management_port %>},
       {ssl, true},
       {ssl_opts, [{cacertfile, "<%= @ssl_cacert %>"},
                   {certfile, "<%= @ssl_cert %>"},
                   {keyfile, "<%= @ssl_key %>"}]}
+<%- elsif ! @mgmt_ssl -%>
+      {port, <%= @management_port %>},
+      {ssl, false}
 <%- else -%>
       {port, <%= @management_port %>}
 <%- end -%>

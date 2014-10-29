@@ -74,6 +74,7 @@ class rabbitmq::params {
   $port                       = '5672'
   $tcp_keepalive              = false
   $ssl                        = false
+  $ssl_mgmt                   = false
   $ssl_only                   = false
   $ssl_cacert                 = 'UNSET'
   $ssl_cert                   = 'UNSET'

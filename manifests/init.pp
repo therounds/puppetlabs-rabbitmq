@@ -30,6 +30,7 @@ class rabbitmq(
   $service_manage             = $rabbitmq::params::service_manage,
   $service_name               = $rabbitmq::params::service_name,
   $ssl                        = $rabbitmq::params::ssl,
+  $ssl_mgmt                   = $rabbitmq::params::ssl_mgmt,
   $ssl_only                   = $rabbitmq::params::ssl_only,
   $ssl_cacert                 = $rabbitmq::params::ssl_cacert,
   $ssl_cert                   = $rabbitmq::params::ssl_cert,
