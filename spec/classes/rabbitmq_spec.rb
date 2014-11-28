@@ -367,6 +367,7 @@ describe 'rabbitmq' do
         let(:params) {
           { :ssl => true,
             :ssl_management_port => 3141,
+            :ssl_mgmt => true,
             :ssl_cacert => '/path/to/cacert',
             :ssl_cert => '/path/to/cert',
             :ssl_key => '/path/to/key',
@@ -398,24 +399,25 @@ describe 'rabbitmq' do
         end
       end
 
-      describe 'ssl admin options' do
+      describe 'ssl without ssl admin options' do
         let(:params) {
           { :ssl => true,
-            :ssl_management_port => 3141,
+            :management_port => 3141,
             :ssl_cacert => '/path/to/cacert',
             :ssl_cert => '/path/to/cert',
             :ssl_key => '/path/to/key',
             :admin_enable => true
         } }
 
-        it 'should set rabbitmq_management ssl options to specified values' do
+        it 'should set rabbitmq & rabbitmq_management ssl options to specified values' do
+          should contain_file('rabbitmq.config').with_content(%r{ssl_listeners, \[5671\]\},})
           should contain_file('rabbitmq.config').with_content(%r{rabbitmq_management, \[})
           should contain_file('rabbitmq.config').with_content(%r{listener, \[})
           should contain_file('rabbitmq.config').with_content(%r{port, 3141\},})
-          should contain_file('rabbitmq.config').with_content(%r{ssl, true\},})
-          should contain_file('rabbitmq.config').with_content(%r{ssl_opts, \[\{cacertfile, "/path/to/cacert"\},})
-          should contain_file('rabbitmq.config').with_content(%r{certfile, "/path/to/cert"\},})
-          should contain_file('rabbitmq.config').with_content(%r{keyfile, "/path/to/key"\}\]\}})
+          should contain_file('rabbitmq.config').with_content(%r{ssl, false\}})
+          should contain_file('rabbitmq.config').with_content(%r{ssl_options, \[\{cacertfile,"/path/to/cacert"\},})
+          should contain_file('rabbitmq.config').with_content(%r{certfile,"/path/to/cert"\},})
+          should contain_file('rabbitmq.config').with_content(%r{keyfile,"/path/to/key"\},})
         end
       end
 
