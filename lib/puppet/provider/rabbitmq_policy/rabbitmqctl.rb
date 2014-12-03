@@ -13,18 +13,18 @@ Puppet::Type.type(:rabbitmq_policy).provide(:rabbitmqctl) do
   # cache policies permissions
   def self.policies(name, vhost)
     @policies = {} unless @policies
-    unless @policies[name]
-      @policies[name] = {}
+    unless @policies[vhost]
+      @policies[vhost] = {}
       rabbitmqctl('list_policies', '-p', vhost).split(/\n/)[1..-2].each do |line|
         if line =~ /^(\S+)\s+(\S*)\s+(\S*)\s+(\S*)\s+(\S*)$/
-          @policies[name][$1] =
+          @policies[vhost][$2] =
             {:pattern => $3, :policy => $4}
         else
           raise Puppet::Error, "cannot parse line from list_policies:#{line}"
         end
       end
     end
-    @policies[name][vhost]
+    @policies[vhost][name]
   end
 
   def policies(name, vhost)
